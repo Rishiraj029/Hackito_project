@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVAMITVA - AI Feature Extraction</title>
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="main-title">AI-based Feature Extraction from Drone Images (SVAMITVA)</h1>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Problem Description -->
+        <section class="problem-description">
+            <p class="description-text">
+                Automated extraction of land features from drone orthophotos to support the SVAMITVA scheme for property mapping and rural development. 
+                Our AI system identifies buildings, roads, and water bodies with high accuracy for government land records.
+            </p>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-container">
+                <h2 class="upload-title">Upload Drone Orthophoto</h2>
+                
+                <!-- File Upload Input -->
+                <div class="file-upload-wrapper">
+                    <input type="file" id="drone-image" class="file-input" accept="image/*" required>
+                    <label for="drone-image" class="file-label">
+                        <span class="upload-icon">📁</span>
+                        <span class="upload-text">Choose drone image file</span>
+                    </label>
+                </div>
+
+                <!-- Selected file display -->
+                <div class="selected-file" id="selected-file" style="display: none;">
+                    <span class="file-name" id="file-name"></span>
+                    <span class="file-size" id="file-size"></span>
+                </div>
+
+                <!-- Proceed Button -->
+                <div class="action-buttons">
+                    <a href="processing.html" class="proceed-btn" id="proceed-btn">
+                        <span class="btn-icon">🚀</span>
+                        Proceed to Analysis
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Preview -->
+        <section class="features-preview">
+            <h3 class="features-title">What we detect:</h3>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon" style="color: #ffd700;">🏢</span>
+                    <span class="feature-label">Buildings & Structures</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon" style="color: #ff4444;">🛣️</span>
+                    <span class="feature-label">Roads & Pathways</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon" style="color: #4444ff;">💧</span>
+                    <span class="feature-label">Water Bodies</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Powered by AI | SVAMITVA Digital India Initiative</p>
+    </footer>
+
+    <!-- JavaScript for file handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('drone-image');
+            const selectedFile = document.getElementById('selected-file');
+            const fileName = document.getElementById('file-name');
+            const fileSize = document.getElementById('file-size');
+            const proceedBtn = document.getElementById('proceed-btn');
+
+            // Handle file selection
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    fileName.textContent = file.name;
+                    fileSize.textContent = `(${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                    selectedFile.style.display = 'block';
+                    
+                    // Convert image to base64 and store in localStorage
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        localStorage.setItem('uploadedImage', e.target.result);
+                        localStorage.setItem('uploadedImageName', file.name);
+                    };
+                    reader.readAsDataURL(file);
+                    
+                    // Enable proceed button
+                    proceedBtn.classList.add('enabled');
+                } else {
+                    selectedFile.style.display = 'none';
+                    proceedBtn.classList.remove('enabled');
+                    localStorage.removeItem('uploadedImage');
+                    localStorage.removeItem('uploadedImageName');
+                }
+            });
+
+            // Prevent proceeding without file
+            proceedBtn.addEventListener('click', function(e) {
+                if (!fileInput.files[0]) {
+                    e.preventDefault();
+                    alert('Please select a drone image first!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

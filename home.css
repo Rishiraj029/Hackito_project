@@ -1,0 +1,451 @@
+/* ===================================================================
+   SVAMITVA - Home Page CSS
+   Theme: Digital Governance (Professional Government AI)
+   =================================================================== */
+
+/* CSS Variables - Professional Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-blue: #1e3a8a;
+  --secondary-blue: #3b82f6;
+  --accent-blue: #60a5fa;
+  --light-blue: #dbeafe;
+  
+  /* Supporting Colors */
+  --success-green: #059669;
+  --warning-amber: #d97706;
+  --neutral-gray: #6b7280;
+  --light-gray: #f8fafc;
+  --border-gray: #e5e7eb;
+  --white: #ffffff;
+  --dark: #1f2937;
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Spacing System */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2rem;     /* 32px */
+  --space-xl: 3rem;     /* 48px */
+  --space-2xl: 4rem;    /* 64px */
+  
+  /* Border Radius */
+  --radius-sm: 0.5rem;  /* 8px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem;    /* 16px */
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  
+  /* Transitions */
+  --transition-fast: all 0.15s ease;
+  --transition-normal: all 0.2s ease;
+  --transition-slow: all 0.3s ease;
+}
+
+/* ===================================================================
+   Reset & Base Styles
+   =================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--light-gray) 0%, #ffffff 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================================================
+   Header Section
+   =================================================================== */
+
+.header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  pointer-events: none;
+}
+
+.main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.025em;
+}
+
+/* ===================================================================
+   Main Content Container
+   =================================================================== */
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-lg);
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+/* ===================================================================
+   Problem Description Section
+   =================================================================== */
+
+.problem-description {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.description-text {
+  font-size: 1.125rem;
+  color: var(--neutral-gray);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ===================================================================
+   Upload Section
+   =================================================================== */
+
+.upload-section {
+  display: flex;
+  justify-content: center;
+}
+
+.upload-container {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-gray);
+  padding: var(--space-2xl);
+  width: 100%;
+  max-width: 600px;
+  transition: var(--transition-normal);
+}
+
+.upload-container:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.upload-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* File Upload Styling */
+.file-upload-wrapper {
+  position: relative;
+  margin-bottom: var(--space-lg);
+}
+
+.file-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  border: 2px dashed var(--accent-blue);
+  border-radius: var(--radius-md);
+  background: var(--light-blue);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  min-height: 150px;
+}
+
+.file-label:hover {
+  border-color: var(--secondary-blue);
+  background: #bfdbfe;
+  transform: scale(1.02);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+  opacity: 0.8;
+}
+
+.upload-text {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--primary-blue);
+}
+
+/* Selected File Display */
+.selected-file {
+  background: #f0f9ff;
+  border: 1px solid var(--accent-blue);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  transition: var(--transition-fast);
+}
+
+.file-name {
+  font-weight: 500;
+  color: var(--primary-blue);
+  margin-right: var(--space-xs);
+}
+
+.file-size {
+  font-size: 0.9rem;
+  color: var(--neutral-gray);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.proceed-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: var(--white);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.proceed-btn.enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.proceed-btn:hover.enabled {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.proceed-btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.125rem;
+}
+
+/* ===================================================================
+   Features Preview Section
+   =================================================================== */
+
+.features-preview {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-gray);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.features-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: var(--space-lg);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-normal);
+  cursor: default;
+}
+
+.feature-item:hover {
+  background: var(--light-gray);
+  transform: translateY(-2px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.feature-label {
+  font-weight: 500;
+  color: var(--dark);
+  text-align: center;
+}
+
+/* ===================================================================
+   Footer Section
+   =================================================================== */
+
+.footer {
+  background: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+  padding: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* ===================================================================
+   Responsive Design
+   =================================================================== */
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: var(--space-lg) var(--space-sm);
+    gap: var(--space-lg);
+  }
+  
+  .upload-container {
+    padding: var(--space-lg);
+  }
+  
+  .file-label {
+    padding: var(--space-lg);
+    min-height: 120px;
+  }
+  
+  .upload-icon {
+    font-size: 2.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .main-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--space-lg) var(--space-sm);
+  }
+  
+  .main-content {
+    padding: var(--space-md) var(--space-sm);
+  }
+  
+  .upload-container {
+    padding: var(--space-md);
+  }
+}
+
+/* ===================================================================
+   Accessibility & Focus States
+   =================================================================== */
+
+.file-input:focus + .file-label {
+  outline: 2px solid var(--secondary-blue);
+  outline-offset: 2px;
+}
+
+.proceed-btn:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .file-label {
+    border-width: 3px;
+  }
+  
+  .upload-container {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===================================================================
+   Print Styles
+   =================================================================== */
+
+@media print {
+  .header {
+    background: none !important;
+    color: var(--dark) !important;
+  }
+  
+  .upload-container,
+  .features-preview {
+    box-shadow: none;
+    border: 1px solid var(--border-gray);
+  }
+  
+  .proceed-btn {
+    display: none;
+  }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing - SVAMITVA AI Analysis</title>
+    <link rel="stylesheet" href="../css/processing.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <h1 class="main-title">SVAMITVA - AI Analysis in Progress</h1>
+    </header>
+
+    <!-- Main Processing Content -->
+    <main class="processing-container">
+        <!-- Processing Status -->
+        <section class="processing-status">
+            <div class="status-card">
+                <!-- Loading Animation -->
+                <div class="loading-animation">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Main Status Text -->
+                <h2 class="processing-title">
+                    Analyzing Drone Image with AI<span class="dots"></span>
+                </h2>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text" id="progress-text">Initializing AI models...</p>
+                </div>
+
+                <!-- Processing Steps -->
+                <div class="processing-steps">
+                    <div class="step" id="step1">
+                        <span class="step-icon">🔄</span>
+                        <span class="step-text">Loading drone orthophoto</span>
+                        <span class="step-status" id="status1">✓</span>
+                    </div>
+                    <div class="step" id="step2">
+                        <span class="step-icon">🔄</span>
+                        <span class="step-text">Preprocessing image data</span>
+                        <span class="step-status" id="status2">⏳</span>
+                    </div>
+                    <div class="step" id="step3">
+                        <span class="step-icon">🔄</span>
+                        <span class="step-text">Running AI feature detection</span>
+                        <span class="step-status" id="status3">⏳</span>
+                    </div>
+                    <div class="step" id="step4">
+                        <span class="step-icon">🔄</span>
+                        <span class="step-text">Generating analysis report</span>
+                        <span class="step-status" id="status4">⏳</span>
+                    </div>
+                </div>
+
+                <!-- Processing Info -->
+                <div class="processing-info">
+                    <p class="info-text">
+                        Our AI system is analyzing your drone image to identify buildings, roads, and water bodies. 
+                        This process typically takes 2-3 minutes depending on image size and complexity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Details -->
+        <section class="tech-details">
+            <div class="details-card">
+                <h3 class="details-title">Processing Details</h3>
+                <ul class="details-list">
+                    <li class="detail-item">AI Model: YOLOv8 + Semantic Segmentation</li>
+                    <li class="detail-item">Resolution: High-precision orthophoto analysis</li>
+                    <li class="detail-item">Features: Buildings, Roads, Water bodies</li>
+                    <li class="detail-item">Accuracy: >95% detection rate</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript for auto-redirect and step simulation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressText = document.getElementById('progress-text');
+            const steps = [
+                { id: 'step1', status: 'status1', text: 'Image loaded successfully', delay: 500 },
+                { id: 'step2', status: 'status2', text: 'Preprocessing complete', delay: 1200 },
+                { id: 'step3', status: 'status3', text: 'AI detection in progress', delay: 2000 },
+                { id: 'step4', status: 'status4', text: 'Analysis complete', delay: 2800 }
+            ];
+
+            const progressMessages = [
+                'Initializing AI models...',
+                'Loading drone orthophoto...',
+                'Preprocessing image data...',
+                'Running feature detection...',
+                'Generating results...',
+                'Analysis complete! Redirecting...'
+            ];
+
+            let currentStep = 0;
+            let messageIndex = 0;
+
+            // Update progress messages
+            const messageInterval = setInterval(() => {
+                if (messageIndex < progressMessages.length - 1) {
+                    progressText.textContent = progressMessages[messageIndex];
+                    messageIndex++;
+                } else {
+                    clearInterval(messageInterval);
+                }
+            }, 500);
+
+            // Simulate processing steps
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    document.getElementById(step.status).textContent = '✓';
+                    document.getElementById(step.id).classList.add('completed');
+                    
+                    if (index === steps.length - 1) {
+                        progressText.textContent = 'Analysis complete! Redirecting...';
+                    }
+                }, step.delay);
+            });
+
+            // Auto-redirect to results page after 8 seconds (increased for demo)
+            setTimeout(() => {
+                window.location.href = 'result.html';
+            }, 8000);
+        });
+
+        // Prevent back navigation during processing
+        window.addEventListener('beforeunload', function(e) {
+            const message = 'Analysis in progress. Are you sure you want to leave?';
+            e.preventDefault();
+            e.returnValue = message;
+            return message;
+        });
+    </script>
+</body>
+</html>
